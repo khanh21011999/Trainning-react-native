@@ -1,6 +1,5 @@
 import React from 'react'
 import { View, Text, StyleSheet, TextInput, Button, TouchableOpacity } from 'react-native'
-
 class MainScreen extends React.Component {
     render() {
         return (

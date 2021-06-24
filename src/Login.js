@@ -1,7 +1,19 @@
 import React from 'react'
-import { View, Text, StyleSheet, TextInput, Button, TouchableOpacity } from 'react-native'
+import { useState } from 'react';
 
-function LoginScreen() {
+import { View, Text, StyleSheet, TextInput, Button, TouchableOpacity } from 'react-native'
+import MainScreen from './MainScreen.js';
+
+
+function LoginScreen({navigation}) {
+    
+    const [info][SetInfo]= useState([
+        {
+            username: "",
+            password: "",
+        }
+    ])
+    const[error][setError]= useState({})
     return (
         <View style={styles.ViewStyle}>
             <Text style={{ fontSize: 40 }}>Login To System</Text>
@@ -16,7 +28,7 @@ function LoginScreen() {
                     style={styles.TextInputForm}
                 />
                 <TouchableOpacity
-
+                    onPress={()=> navigation.navigate('Home')}
                     style={styles.ButtonLogin}>
 
                     <Text>Login</Text>
@@ -27,6 +39,7 @@ function LoginScreen() {
         </View>
     )
 }
+
 const styles = StyleSheet.create({
     ViewStyle: {
         alignItems: 'center',
@@ -46,6 +59,7 @@ const styles = StyleSheet.create({
 
     },
     TextInputForm: {
+        color: "black",
         backgroundColor: 'rgba(214, 208, 208,1)',
         margin: 20,
         borderRadius: 25,
