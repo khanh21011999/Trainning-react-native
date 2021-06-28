@@ -1,40 +1,96 @@
 import React from 'react'
 import { useState } from 'react';
-
+import * as Yup from 'yup'
 import { View, Text, StyleSheet, TextInput, Button, TouchableOpacity } from 'react-native'
-import MainScreen from './MainScreen.js';
+import { Formik, Form, Field, ErrorMessage } from "formik";
 
 
-function LoginScreen({navigation}) {
-    
-    const [info][SetInfo]= useState([
-        {
-            username: "",
-            password: "",
+function LoginScreen({ navigation }) {
+    function getTextStyle(isValid){
+        if(isValid){
+            return{
+                color:'black'
+            }
         }
-    ])
-    const[error][setError]= useState({})
+        else{
+            return{
+                color:'grey'
+            }
+        }
+    }
+    const loginValidationSchema = Yup.object().shape({
+        email: Yup
+            .string()
+            .email("Please enter valid email")
+            .required('Email Address is Required'),
+        password: Yup
+            .string()
+            .min(8, ({ min }) => `Password must be at least ${min} characters`)
+            .required('Password is required'),
+    })
     return (
+
         <View style={styles.ViewStyle}>
             <Text style={{ fontSize: 40 }}>Login To System</Text>
-            <View >
-                <TextInput
-                    placeholder="Enter username"
-                    style={styles.TextInputForm}
+            <Formik
+                validateOnMount={true}
+                validationSchema={loginValidationSchema}
+                initialValues={{ email: '', password: '' }}
+                onSubmit={() => { navigation.navigate('Home') }}
 
-                />
-                <TextInput
-                    placeholder="Enter password"
-                    style={styles.TextInputForm}
-                />
-                <TouchableOpacity
-                    onPress={()=> navigation.navigate('Home')}
-                    style={styles.ButtonLogin}>
+            >
+                {({
+                    handleChange,
+                    handleBlur,
+                    handleSubmit,
+                    values,
+                    errors,
+                    touched,
+                    isValid,
+                }) => (
+                    <View >
+                        <TextInput
+                            name="email"
+                            placeholder="Email Address"
+                            style={styles.TextInputForm}
+                            onChangeText={handleChange('email')}
+                            onBlur={handleBlur('email')}
+                            value={values.email}
+                            keyboardType="email-address"
 
-                    <Text>Login</Text>
-                </TouchableOpacity>
+                        />
+                        {(errors.email && touched.email) &&
+                            <Text style={styles.errorText}>{errors.email}</Text>
+                        }
+                        <TextInput
+                            name="password"
+                            placeholder="Password"
+                            onChangeText={handleChange('password')}
+                            onBlur={handleBlur('password')}
+                            value={values.password}
+                            secureTextEntry
+                            style={styles.TextInputForm}
+                        />
+                        {(errors.password && touched.password) &&
+                            <Text style={styles.errorText}>{errors.password}</Text>
+                        }
+                        <TouchableOpacity
+                            onPress={handleSubmit}
+                            title="LOGIN"
+                            style={styles.ButtonLoginBlur}
+                            disabled={!isValid || values.email === ''}
+                        >
+                        <Text style={getTextStyle(isValid)}>Login</Text>
 
-            </View>
+                        </TouchableOpacity>
+
+
+
+                    </View>
+                )}
+
+
+            </Formik>
 
         </View>
     )
@@ -58,6 +114,16 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(214, 208, 208,1)',
 
     },
+    ButtonLoginBlur: {
+        width: 200,
+        height: 50,
+        alignSelf: "center",
+        alignItems: "center",
+        justifyContent: "center",
+        borderRadius: 25,
+        backgroundColor: 'rgba(214, 208, 208,1)',
+
+    },
     TextInputForm: {
         color: "black",
         backgroundColor: 'rgba(214, 208, 208,1)',
@@ -65,6 +131,16 @@ const styles = StyleSheet.create({
         borderRadius: 25,
         width: 300,
         paddingLeft: 20,
-    }
+    },
+    loginTextBlur:{
+        color: 'grey'
+    },
+    errorText: {
+        fontSize: 12,
+        color: 'red',
+        right: -30,
+        top:-15
+    
+    },
 })
 export default LoginScreen

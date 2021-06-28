@@ -1,24 +1,22 @@
 import React from 'react'
 import { View, Text, StyleSheet, TextInput, Button, TouchableOpacity } from 'react-native'
-class MainScreen extends React.Component {
-    render() {
-        return (
-            <View style={styles.ViewStyle}>
-                <Text style={styles.TextForm}>Welcome to System</Text>
-                <View >
-                    <TouchableOpacity
+function MainScreen({ navigation }) {
+    return (
+        <View style={styles.ViewStyle}>
+            <Text style={styles.TextForm}>Welcome to System</Text>
+            <View >
+                <TouchableOpacity
+                    onPress={() => navigation.navigate('Login')}
 
-                        style={styles.ButtonLogout}>
-    
-                        <Text>Log out</Text>
-                    </TouchableOpacity>
+                    style={styles.ButtonLogout}>
 
-                </View>
+                    <Text>Log out</Text>
+                </TouchableOpacity>
 
             </View>
-        )
-    }
 
+        </View>
+    )
 }
 const styles = StyleSheet.create({
     ViewStyle: {
@@ -37,9 +35,9 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(214, 208, 208,1)',
 
     },
-    TextForm:{
-        fontSize:40,
-        marginBottom:400
+    TextForm: {
+        fontSize: 40,
+        marginBottom: 400
 
     }
 })
