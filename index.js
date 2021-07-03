@@ -1,6 +1,17 @@
 import 'react-native-gesture-handler';
-import {AppRegistry} from 'react-native';
+import { AppRegistry, View } from 'react-native';
 import App from './App.js';
-import {name as appName} from './app.json';
+import React from 'react';
+import { name as appName } from './app.json';
 import MyReactNativeForm from './change.js'
-AppRegistry.registerComponent(appName, () => App);
+import { Provider } from 'react-redux'
+import Counter from './src/Redux/counter.js';
+import store from './src/Redux/Store/store.js'
+function Display() {
+    return (
+        <Provider store={store}>
+            <Counter />
+        </Provider>
+    )
+}
+AppRegistry.registerComponent(appName, () => Display);
