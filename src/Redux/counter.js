@@ -5,17 +5,18 @@ import { View, Text, StyleSheet, TextInput, Button, TouchableOpacity } from 'rea
 function Counter() {
     const dispatch = useDispatch()
     const Counter = useSelector(state => {
-        return (state.number)
+        return (state.loginStatus)
     })
+
     function handleIncrease() {
-        dispatch({ type: 'increase',  amount : 10 })
+        dispatch({ type: 'changeLogin' })
     }
     return (
         <View>
             <Button
                 onPress={handleIncrease}
-                title="Increase" ></Button>
-            <Text>{Counter}</Text>
+                title="Change" ></Button>
+            <Text >{console.log(Counter)}</Text>
         </View>
     )
 

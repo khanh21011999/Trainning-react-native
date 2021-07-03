@@ -1,12 +1,30 @@
 import React from 'react'
 import { View, Text, StyleSheet, TextInput, Button, TouchableOpacity } from 'react-native'
-function MainScreen({ navigation }) {
+import LoginScreen from './Login.js'
+import { useDispatch, useSelector } from 'react-redux';
+
+function MainScreen({ navigation, route }) {
+    const dispatch = useDispatch()
+    const Login = useSelector(state => {
+        return state.loginStatus
+    })
+
+    //   const initModal = false;
+    function handleLogin() {
+        dispatch({ type: 'getDefault' })
+    }
     return (
         <View style={styles.ViewStyle}>
             <Text style={styles.TextForm}>Welcome to System</Text>
             <View >
                 <TouchableOpacity
-                    onPress={() => navigation.navigate('Login')}
+                    onPress={() => {
+                        //route.params.cb()
+                        handleLogin()
+                        console.log(Login)
+                        navigation.navigate('Login')
+
+                    }}
 
                     style={styles.ButtonLogout}>
 

@@ -10,7 +10,7 @@ import store from './src/Redux/Store/store.js'
 function Display() {
     return (
         <Provider store={store}>
-            <Counter />
+            <App/>
         </Provider>
     )
 }

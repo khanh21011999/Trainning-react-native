@@ -1,14 +1,19 @@
 import { View } from 'react-native';
-import { createStore } from 'redux';
-initState={
-    number: 0,
+import { createStore, compose } from 'redux';
+import devToolsEnhancer from 'remote-redux-devtools';
+import { composeWithDevTools } from 'redux-devtools-extension';
+
+initState = {
+    loginStatus: false,
 }
-const CounterAction = (state = initState, action) => {
-    if (action.type == 'increase') {
-        return { number: state.number + action.amount }
+const LoginAction = (state =  initState , action) => {
+    if (action.type == 'changeLogin') {
+        return { loginStatus: !state.loginStatus }
+    }
+    else if (action.type == 'getDefault') {
+        return { loginStatus: false }
     }
     return state
 }
-const store = createStore(CounterAction,
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+const store = createStore(LoginAction, composeWithDevTools());
 export default store
