@@ -4,7 +4,7 @@ import { CirclesLoader, TextLoader, RotationHoleLoader } from 'react-native-indi
 import * as Yup from 'yup';
 import { View, Text, StyleSheet, Modal, TextInput, Button, TouchableOpacity } from 'react-native';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import * as loginData from './localData.json';
+// import * as loginData from './localData.json';
 import { useDispatch, useSelector } from 'react-redux';
 
 function LoginScreen({ navigation, props }) {

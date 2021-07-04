@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, Text, StyleSheet, TextInput, Button, TouchableOpacity } from 'react-native'
-import LoginScreen from './Login.js'
+//import LoginScreen from '../Login/Login.js'
 import { useDispatch, useSelector } from 'react-redux';
 
 function MainScreen({ navigation, route }) {
