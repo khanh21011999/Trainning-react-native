@@ -5,6 +5,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 
 initState = {
     loginStatus: false,
+    
 }
 const LoginAction = (state =  initState , action) => {
     if (action.type == 'changeLogin') {
