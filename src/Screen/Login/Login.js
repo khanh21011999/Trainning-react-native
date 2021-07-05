@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { CirclesLoader, TextLoader, RotationHoleLoader } from 'react-native-indicator';
 import * as Yup from 'yup';
@@ -9,26 +9,28 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getUser } from '../../Redux/Action/action.js';
 
 function LoginScreen({ navigation }) {
-  // React.useEffect(() => {
-  //   dispatch({ type: 'getDefault' })
+ 
 
-  // },[])
-  // const [username, setUsername] = useState("")
+  //set timeout ID for setTimeOut()
   const timeIdRef = React.useRef(null)
   const dispatch = useDispatch()
-  useEffect(()=>{
-    dispatch(getUser())
-  },[dispatch])
-  const user = useSelector(state=>{state.User.user})
+
+  //mock user from fake api
   useEffect(() => {
-      return () => {
-        if (timeIdRef.current) {
-          // make sure this is always cleared in case clearTo is never called
-          clearTimeout(timeIdRef.current)
-        }
+    dispatch(getUser())
+  }, [dispatch])
+
+
+  const user = useSelector(state => { return state.User.user })
+  useEffect(() => {
+    return () => {
+      if (timeIdRef.current) {
+        // make sure this is always cleared in case clearTo is never called
+        clearTimeout(timeIdRef.current)
       }
+    }
   }, [timeIdRef])
-  
+
   const Login = useSelector(state => {
     return state.LoginAction.loginStatus
   })
@@ -64,7 +66,7 @@ function LoginScreen({ navigation }) {
     const timeID = setTimeout(() => {
       navigation.navigate("Home");
     }, 3000);
-    timeIdRef.current =  timeID
+    timeIdRef.current = timeID
   }
 
   function clearTO() {
@@ -109,8 +111,8 @@ function LoginScreen({ navigation }) {
         validationSchema={loginValidationSchema}
         initialValues={{ email: '', password: '' }}
         onSubmit={SetTimer}
-          // () => navigation.navigate('Login')
-        
+      // () => navigation.navigate('Login')
+
       >
         {({ handleChange, handleBlur, handleSubmit, values, errors, touched, isValid }) => (
 
@@ -150,7 +152,7 @@ function LoginScreen({ navigation }) {
               <Modal
                 transparent
                 visible={Login}>
-                <View style={{ backgroundColor: '#000000', flex: 1, justifyContent:'center',alignContent:'center' }}>
+                <View style={{ backgroundColor: '#000000', flex: 1, justifyContent: 'center', alignContent: 'center' }}>
                   <View style={styles.ModalStyle}>
                     <CirclesLoader />
                     <TextLoader
@@ -188,7 +190,7 @@ const styles = StyleSheet.create({
   // },
   ModalStyle: {
     width: 300,
-    height:300,
+    height: 300,
     alignItems: 'center',
     alignSelf: 'center',
     justifyContent: 'center',
