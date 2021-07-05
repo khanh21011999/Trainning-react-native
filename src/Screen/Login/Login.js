@@ -7,7 +7,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 // import * as loginData from './localData.json';
 import { useDispatch, useSelector } from 'react-redux';
 
-function LoginScreen({ navigation, props }) {
+function LoginScreen({ navigation }) {
   // React.useEffect(() => {
   //   dispatch({ type: 'getDefault' })
 
@@ -23,12 +23,11 @@ function LoginScreen({ navigation, props }) {
         }
       }
   }, [timeIdRef])
-  const [timeID, setTimeID] = useState(null)
   const dispatch = useDispatch()
   const Login = useSelector(state => {
-    return state.loginStatus
+    return state.LoginAction.loginStatus
   })
-
+  console.log(Login)
   //   const initModal = false;
   function handleLogin() {
     dispatch({ type: 'changeLogin' })
