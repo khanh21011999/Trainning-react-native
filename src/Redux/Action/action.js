@@ -6,5 +6,5 @@ export const getUser = () => ({
 })
 export const setUser = (user) => ({
     type: actionList.SET_USER,
-    user: user
+    user
 })

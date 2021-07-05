@@ -6,6 +6,7 @@ import { View, Text, StyleSheet, Modal, TextInput, Button, TouchableOpacity } fr
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 // import * as loginData from './localData.json';
 import { useDispatch, useSelector } from 'react-redux';
+import { getUser } from '../../Redux/Action/action.js';
 
 function LoginScreen({ navigation }) {
   // React.useEffect(() => {
@@ -14,7 +15,11 @@ function LoginScreen({ navigation }) {
   // },[])
   // const [username, setUsername] = useState("")
   const timeIdRef = React.useRef(null)
-
+  const dispatch = useDispatch()
+  useEffect(()=>{
+    dispatch(getUser())
+  },[dispatch])
+  const user = useSelector(state=>{state.User.user})
   useEffect(() => {
       return () => {
         if (timeIdRef.current) {
@@ -23,11 +28,11 @@ function LoginScreen({ navigation }) {
         }
       }
   }, [timeIdRef])
-  const dispatch = useDispatch()
+  
   const Login = useSelector(state => {
     return state.LoginAction.loginStatus
   })
-  console.log(Login)
+  //console.log(Login)
   //   const initModal = false;
   function handleLogin() {
     dispatch({ type: 'changeLogin' })
@@ -35,6 +40,9 @@ function LoginScreen({ navigation }) {
   function handlDefault() {
     dispatch({ type: 'getDefault' })
   }
+
+  //not show??
+  console.log(user)
   //console.log('Login ' + Login)
   //   const [show, doShow] = useState(initModal);
 

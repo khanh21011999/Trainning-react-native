@@ -7,7 +7,7 @@ const User = (state=initState, action)=>{
     switch(action.type){
         case actionList.SET_USER:
             const {user} = action
-            return {user:user}
+            return {...state, user }
         default:
             return state;
     }
