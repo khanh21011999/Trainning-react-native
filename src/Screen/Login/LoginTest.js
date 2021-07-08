@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import { CirclesLoader, TextLoader, RotationHoleLoader } from 'react-native-indicator';
 import * as Yup from 'yup';
-import { useSelector, connect,useDispatch } from 'react-redux';
+import { useSelector, connect, useDispatch } from 'react-redux';
 import { View, Text, StyleSheet, Modal, TextInput, Button, TouchableOpacity } from 'react-native';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as loginData from './localData.json';
@@ -10,10 +10,10 @@ import * as loginData from './localData.json';
 function LoginScreenTest({ navigation, props }) {
   // const [username, setUsername] = useState("")
   // const [password, setPassword] = useState("")
-  const dispatch  = useDispatch();
-  const LoginCheck = useSelector(state => {
-    return (state.login)
-  })
+  const dispatch = useDispatch();
+  const LoginCheck = useSelector((state) => {
+    return state.login;
+  });
   const initModal = false;
   const [show, doShow] = useState(initModal);
   // const [visible, UpdateView] = useState(false)
@@ -27,7 +27,7 @@ function LoginScreenTest({ navigation, props }) {
   function SetTimer() {
     setTimeout(() => {
       navigation.navigate(
-        'Home'
+        'Home',
         // {
         //     cb: () => {
         //         console.log('call here')
@@ -55,7 +55,7 @@ function LoginScreenTest({ navigation, props }) {
     return <CirclesLoader />;
   }
   // function hideText(visible){
-  //     if(isVisable)
+  //     if(isVisible)
 
   // }
   const loginValidationSchema = Yup.object().shape({
@@ -77,8 +77,7 @@ function LoginScreenTest({ navigation, props }) {
             SetTimer();
           }
           // () => navigation.navigate('Login')
-        }
-      >
+        }>
         {({ handleChange, handleBlur, handleSubmit, values, errors, touched, isValid }) => (
           <View>
             <TextInput
@@ -107,8 +106,7 @@ function LoginScreenTest({ navigation, props }) {
             <TouchableOpacity
               onPress={handleSubmit}
               style={styles.ButtonLogin}
-              disabled={!isValid || values.email === ''}
-            >
+              disabled={!isValid || values.email === ''}>
               <CirclesLoader size={20} dotRadius={7} />
               <Text style={getTextStyle(isValid)}>Login</Text>
             </TouchableOpacity>
@@ -122,7 +120,7 @@ function LoginScreenTest({ navigation, props }) {
                         fontSize: 25,
                         marginTop: 20,
                       }}
-                      text="Logining you in"
+                      text="Logging you in"
                     />
                     <TouchableOpacity onPress={ChangeModalValue} style={styles.ButtonBack}>
                       <Text>Go back</Text>
