@@ -8,7 +8,7 @@ import {View, Text, StyleSheet, Modal, TextInput, TouchableOpacity} from 'react-
 import {Formik} from 'formik';
 // import * as loginData from './localData.json';
 import {useDispatch, useSelector} from 'react-redux';
-import {getUser} from '../../Redux/Action/action.js';
+import {getUser, GetUserInfo} from '../../Redux/Action/action.js';
 import {handleGetUser} from '../../Redux/Saga/handler/user.js';
 
 // eslint-disable-next-line require-jsdoc
@@ -18,7 +18,8 @@ function LoginScreen({navigation}) {
 	// set timeout ID for setTimeOut()
 	const timeIdRef = React.useRef(null);
 	const dispatch = useDispatch();
-	const [userInfo, getUserInfo] = useState('');
+	const [username, getUsername] = useState('');
+	const [password, getPassword] = useState('')
 
 	// handleInput = (e) => {
 	// 	getUserInfo(e.target.value);
@@ -27,16 +28,20 @@ function LoginScreen({navigation}) {
 	// mock user from fake api
 	useEffect(() => {
 		dispatch(getUser());
+	
 	}, [dispatch]);
+	dispatch(GetUserInfo(username,password));
 	// const handlegetdata= ({user,password})=>{
 	//   dispatch(GetUserInfo(user,password))
 	// }
 
 	// console.log(handleGetdata.user)
+   
 
 	const user = useSelector((state) => {
 		return state.User.user;
 	});
+	console.log(user)
 	useEffect(() => {
 		return () => {
 			if (timeIdRef.current) {
@@ -45,7 +50,7 @@ function LoginScreen({navigation}) {
 			}
 		};
 	}, [timeIdRef]);
-	console.log();
+	// console.log();
 
 	const Login = useSelector((state) => {
 		return state.LoginAction.loginStatus;
@@ -61,7 +66,7 @@ function LoginScreen({navigation}) {
 	}
 
 	// not show??
-	console.log(userInfo);
+	// console.log(username);
 	// console.log('Login ' + Login)
 	//   const [show, doShow] = useState(initModal);
 
@@ -120,15 +125,14 @@ function LoginScreen({navigation}) {
 	return (
 		<View style={styles.ViewStyle}>
 			<Text style={{fontSize: 40}}>Login To System</Text>
-			<TextInput value={userInfo} onChange={handleGetUser} />
 
 			<Formik
 				validateOnMount
 				validationSchema={loginValidationSchema}
 				initialValues={{email: '', password: ''}}
 				onSubmit={value=>{
-					console.log(value)
-					getUserInfo(value.email)
+					getUsername(value.email)
+					getPassword(value.password)
 					SetTimer()
 				}}
 			// () => navigation.navigate('Login')
