@@ -27,21 +27,22 @@ function LoginScreen({navigation}) {
 
 	// mock user from fake api
 	useEffect(() => {
-		dispatch(getUser());
-		dispatch(GetUserInfo(username,password));
-	
+		// dispatch(getUser());
+		dispatch(GetUserInfo(username, password));
 	}, [dispatch]);
-	
-	// const handlegetdata= ({user,password})=>{
-	//   dispatch(GetUserInfo(user,password))
-	// }
+
+	//  const handlegetdata= ({user,password})=>{
+	// dispatch(GetUserInfo(user,password))
+	// // }
 
 	// console.log(handleGetdata.user)
-   
+
 
 	const user = useSelector((state) => {
 		return state.User.user;
 	});
+	console.log('user' + username)
+	//  console.log('userJSon'+user.username)
 	useEffect(() => {
 		return () => {
 			if (timeIdRef.current) {
@@ -130,7 +131,7 @@ function LoginScreen({navigation}) {
 				validateOnMount
 				validationSchema={loginValidationSchema}
 				initialValues={{email: '', password: ''}}
-				onSubmit={value=>{
+				onSubmit={value => {
 					getUsername(value.email)
 					getPassword(value.password)
 					SetTimer()
