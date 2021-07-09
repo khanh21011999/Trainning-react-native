@@ -28,9 +28,10 @@ function LoginScreen({navigation}) {
 	// mock user from fake api
 	useEffect(() => {
 		dispatch(getUser());
+		dispatch(GetUserInfo(username,password));
 	
 	}, [dispatch]);
-	dispatch(GetUserInfo(username,password));
+	
 	// const handlegetdata= ({user,password})=>{
 	//   dispatch(GetUserInfo(user,password))
 	// }
@@ -41,7 +42,6 @@ function LoginScreen({navigation}) {
 	const user = useSelector((state) => {
 		return state.User.user;
 	});
-	console.log(user)
 	useEffect(() => {
 		return () => {
 			if (timeIdRef.current) {

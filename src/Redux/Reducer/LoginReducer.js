@@ -1,9 +1,9 @@
 import { changeLogin, getDefault } from '../Action/ActionList.js';
 
-initState = {
+ const initStateLoginAction = {
   loginStatus: false,
 };
-const LoginAction = (state = initState, action) => {
+const LoginAction = (state = initStateLoginAction, action) => {
   if (action.type == changeLogin) {
     return { loginStatus: !state.loginStatus };
   } else if (action.type == getDefault) {

@@ -22,7 +22,7 @@ function MainScreen({navigation, route}) {
 					onPress={() => {
 						//route.params.cb()
 						handleLogin();
-						console.log(Login);
+						//console.log(Login);
 						navigation.navigate('Login');
 					}}
 					style={styles.ButtonLogout}>
