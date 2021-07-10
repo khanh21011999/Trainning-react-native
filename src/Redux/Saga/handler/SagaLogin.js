@@ -26,10 +26,10 @@ function* loginSaga(action) {
 	const getJsonData = JSON.parse(JSON.stringify(getJson))
 
 	const getJsonUsername = String(getJsonData.username)
-	console.log('JsonUsername'+getJsonUsername)
-	console.log("local data" + action.data.username)
-	console.log('getJsonData'+getJsonData)
-	console.log('GetJson'+getJson)
+	console.log('JsonUsername '+getJsonUsername)
+	console.log("local data " + action.data.username)
+	console.log('getJsonData '+getJsonData)
+	console.log('GetJson '+getJson)
 	
 
 	const getJsonPassword = String(getJsonData.password)

@@ -14,14 +14,18 @@ const AuthReducer =(state=initStateAuth,action)=>{
 					isLogIn: true,
         };
       }
+		case actionList.GET_USER_INFO:
+			{
+				return initStateAuth
+			}
     case actionList.LOGIN_FAIL:
       {
        
-        return initialState;
+        return initStateAuth
       }
     case actionList.LOG_OUT:
       {
-        return initialState;
+        return initStateAuth
       }
     default:
       return state;
