@@ -6,8 +6,8 @@ const initState = {
 const User = (state = initState, action) => {
   switch (action.type) {
     case actionList.SET_USER:
-      user = action;
-      return user;
+      const {user} = action;
+      return {...state,user};
     default:
       return state;
   }
