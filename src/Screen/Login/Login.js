@@ -27,25 +27,22 @@ function LoginScreen({navigation}) {
 		dispatch(getUser());
 
 	}, [dispatch]);
-	useEffect(() => {
-		if (username !== '' && password !== '') {
-			Compare()
-			console.log(Compare() == 'wrong username')
-		}
-	}, [username, password, Compare]);
-	function Compare() {
-		if (username === user.username) {
-			if (password == user.password) {
+	// useEffect(() => {
+	// 	if (username !== '' && password !== '') {
+	// 		Compare()
+	// 	}
+	// }, [username, password, Compare]);
+	function Compare(usernameLocal,passwordLocal) {
+		if (usernameLocal === user.username && passwordLocal == user.password) {
 
-				console.log("LOGIN SUCCESS")
-				return ("LOGIN SUCCESS")
-			}
-			else {
-				console.log("Wrong pass")
-				return ("Wrong pass")
-			}
+			console.log("LOGIN SUCCESS")
+			return ("LOGIN SUCCESS")
 		}
-		else {
+		else if(usernameLocal === user.username && passwordLocal != user.password) {
+			console.log("Wrong pass")
+			return ("Wrong pass")
+		}
+		else if (usernameLocal !== user.username && passwordLocal == user.password) {
 			console.log("wrong username")
 			return ("wrong username")
 
@@ -104,8 +101,9 @@ function LoginScreen({navigation}) {
 	//   }
 	// setTimer after Model Appear
 
-	function SetTimer() {
+	function SetTimer(localUsername,localPassword) {
 		handleLogin();
+		console.log(Compare(localUsername,localPassword) === 'LOGIN SUCCESS')
 		if (timeIdRef.current) {
 			// clear any previous timeIdRef to avoid multiple button click activate multiple setTimeout
 			clearTimeout(timeIdRef.current);
@@ -159,9 +157,10 @@ function LoginScreen({navigation}) {
 				onSubmit={value => {
 					getUsername(value.email)
 					getPassword(value.password)
+					Compare(value.email,value.password)
 					// console.log('User from local ' + username)
 					// console.log('User from Json ' + user.username) ///console log but return nothing
-					SetTimer()
+					SetTimer(value.email,value.password)
 				}}
 			// () => navigation.navigate('Login')
 			>
