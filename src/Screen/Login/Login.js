@@ -18,8 +18,6 @@ function LoginScreen({navigation}) {
 	// set timeout ID for setTimeOut()
 	const timeIdRef = React.useRef(null);
 	const dispatch = useDispatch();
-	const [username, getUsername] = useState('');
-	const [password, getPassword] = useState('')
 	function GetUser(username,password){
 		dispatch(GetUserInfo(username, password))
 	}
@@ -45,9 +43,6 @@ function LoginScreen({navigation}) {
 	// console.log(handleGetdata.user)
 
 
-	const user = useSelector((state) => {
-		return state.User.user;
-	});
 	// console.log('user' + username)
 	//  console.log('userJSon'+user.username)
 	useEffect(() => {
