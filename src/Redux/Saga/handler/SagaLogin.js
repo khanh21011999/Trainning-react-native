@@ -17,7 +17,6 @@ function* SaveToAsyncStorage(data) {
 }
 function* loginSaga(action) {
 
-	console.log('Saga is working')
 	const getJson = yield call(requestGetUser)
 	const getJsonData = getJson
 
@@ -28,18 +27,17 @@ function* loginSaga(action) {
 
 	const getJsonPassword = String(getJsonData.password)
 
-	if (String(action.data.username) === getJsonUsername) {
-		if (String(action.data.password) === getJsonPassword) {
-			console.log('saga login success')
-			yield put({type: 'LOGIN_SUCCESS'})
-			SaveToAsyncStorage(action.data)
-		}
-		else {
-			console.log('saga password fail')
-		}
+	if (String(action.data.username) === getJsonUsername && String(action.data.password) === getJsonPassword) {
+		console.log('saga login success')
+		yield put({type: 'LOGIN_SUCCESS'})
+		SaveToAsyncStorage(action.data)
+
 	}
-	else {
-		console.log("saga user fail")
+	else if(String(action.data.username) !== getJsonUsername && String(action.data.password) === getJsonPassword){
+		console.log('wrong username')
+	}
+	else if(String(action.data.username) !== getJsonUsername && String(action.data.password) !== getJsonPassword){
+		console.log('wrong password')
 	}
 }
 export {loginSaga}

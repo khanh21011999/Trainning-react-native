@@ -7,7 +7,6 @@ const AuthReducer =(state=initStateAuth,action)=>{
 	switch (action.type) {
     case actionList.LOGIN_SUCCESS:
       {
-        console.log('action : LOG IN SUCCESS');
         return {
 				
           isAuth: true,
