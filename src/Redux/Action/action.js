@@ -7,10 +7,13 @@ export const setUser = (user) => ({
 	type: actionList.SET_USER,
 	user,
 });
-export const GetUserInfo = (user, password) => {
-	return{
+export const GetUserInfo = (username, password) => {
+	return {
 		type: actionList.GET_USER_INFO,
-		data: {user, password},
+		data: {
+			username,
+			password
+		},
 	}
 };
 export const LoginSuccess = (data) => {

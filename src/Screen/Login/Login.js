@@ -20,7 +20,10 @@ function LoginScreen({navigation}) {
 	const dispatch = useDispatch();
 	const [username, getUsername] = useState('');
 	const [password, getPassword] = useState('')
-
+	function GetUser(username,password){
+		dispatch(GetUserInfo(username, password))
+	}
+  
 	// handleInput = (e) => {
 	// 	getUserInfo(e.target.value);
 	// };
@@ -31,7 +34,7 @@ function LoginScreen({navigation}) {
 
 
 	// }, [dispatch]);
-	dispatch(GetUserInfo(username, password))
+	
 	// function getLocalData(username, password) {
 		
 	// }
@@ -84,6 +87,7 @@ function LoginScreen({navigation}) {
 	//     doShow(!show);
 	//   }
 	// setTimer after Model Appear
+	
 
 	function SetTimer() {
 		handleLogin();
@@ -138,8 +142,7 @@ function LoginScreen({navigation}) {
 				validationSchema={loginValidationSchema}
 				initialValues={{email: '', password: ''}}
 				onSubmit={value => {
-					getUsername(value.email)
-					getPassword(value.password)
+					GetUser(value.email,value.password)
 					SetTimer()
 				}}
 			// () => navigation.navigate('Login')
