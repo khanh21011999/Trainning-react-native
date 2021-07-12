@@ -11,6 +11,9 @@ import {useDispatch, useSelector} from 'react-redux';
 import {getUser, GetUserInfo} from '../../Redux/Action/action.js';
 import {handleGetUser} from '../../Redux/Saga/handler/user.js';
 
+// eslint-disable-next-line require-jsdoc
+// eslint-disable-next-line react/prop-types
+// eslint-disable-next-line require-jsdoc
 function LoginScreen({navigation}) {
 	// set timeout ID for setTimeOut()
 	const timeIdRef = React.useRef(null);
@@ -23,33 +26,15 @@ function LoginScreen({navigation}) {
 	// };
 
 	// mock user from fake api
-	useEffect(() => {
-		dispatch(getUser());
-
-	}, [dispatch]);
 	// useEffect(() => {
-	// 	if (username !== '' && password !== '') {
-	// 		Compare()
-	// 	}
-	// }, [username, password, Compare]);
-	function Compare(usernameLocal,passwordLocal) {
-		if (usernameLocal === user.username && passwordLocal == user.password) {
+	// 	dispatch(getUser());
 
-			console.log("LOGIN SUCCESS")
-			return ("LOGIN SUCCESS")
-		}
-		else if(usernameLocal === user.username && passwordLocal != user.password) {
-			console.log("Wrong pass")
-			return ("Wrong pass")
-		}
-		else if (usernameLocal !== user.username && passwordLocal == user.password) {
-			console.log("wrong username")
-			return ("wrong username")
 
-		}
-	}
-	//dispatch(GetUserInfo(username, password));
-
+	// }, [dispatch]);
+	dispatch(GetUserInfo(username, password))
+	// function getLocalData(username, password) {
+		
+	// }
 	//  const handlegetdata= ({user,password})=>{
 	// dispatch(GetUserInfo(user,password))
 	// // }
@@ -60,10 +45,8 @@ function LoginScreen({navigation}) {
 	const user = useSelector((state) => {
 		return state.User.user;
 	});
-	function getAuth() {
-
-	}
-
+	// console.log('user' + username)
+	//  console.log('userJSon'+user.username)
 	useEffect(() => {
 		return () => {
 			if (timeIdRef.current) {
@@ -72,6 +55,7 @@ function LoginScreen({navigation}) {
 			}
 		};
 	}, [timeIdRef]);
+
 	// console.log();
 
 	const Login = useSelector((state) => {
@@ -101,15 +85,13 @@ function LoginScreen({navigation}) {
 	//   }
 	// setTimer after Model Appear
 
-	function SetTimer(localUsername,localPassword) {
+	function SetTimer() {
 		handleLogin();
-		console.log(Compare(localUsername,localPassword) === 'LOGIN SUCCESS')
 		if (timeIdRef.current) {
 			// clear any previous timeIdRef to avoid multiple button click activate multiple setTimeout
 			clearTimeout(timeIdRef.current);
 		}
 		const timeID = setTimeout(() => {
-
 			navigation.navigate('Home');
 		}, 3000);
 		timeIdRef.current = timeID;
@@ -133,6 +115,7 @@ function LoginScreen({navigation}) {
 			color: 'grey',
 		};
 	}
+
 	//   function getLoginText() {
 	//     return <CirclesLoader />;
 	//   }
@@ -157,10 +140,7 @@ function LoginScreen({navigation}) {
 				onSubmit={value => {
 					getUsername(value.email)
 					getPassword(value.password)
-					Compare(value.email,value.password)
-					// console.log('User from local ' + username)
-					// console.log('User from Json ' + user.username) ///console log but return nothing
-					SetTimer(value.email,value.password)
+					SetTimer()
 				}}
 			// () => navigation.navigate('Login')
 			>
