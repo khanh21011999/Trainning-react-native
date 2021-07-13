@@ -1,6 +1,7 @@
 import * as actionList from '../Action/ActionList.js';
 const initStateAuth = {
 	isAuth: false,
+	ModalShow:false,
 }
 const AuthReducer = (state = initStateAuth, action) => {
 	switch (action.type) {
@@ -8,6 +9,7 @@ const AuthReducer = (state = initStateAuth, action) => {
 			{
 				return {
 					isAuth: true,
+					ModalShow:true
 				};
 			}
 		case actionList.LOG_OUT:

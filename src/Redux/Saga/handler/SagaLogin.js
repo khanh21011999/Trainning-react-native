@@ -3,6 +3,7 @@ import {call, cancel, put} from 'redux-saga/effects'
 import {requestGetUser} from '../request/user.js'
 import {CommonActions} from '@react-navigation/native';
 import {navigate} from '../../../../App.js';
+import Toast from 'react-native-toast-message';
 
 function* SaveToAsyncStorage(data) {
 	try {
@@ -35,10 +36,11 @@ function* loginSaga(action, navigation) {
 			navigate('Home')
 
 		}, 2000);
-		Alert.alert(
-			'Login Status',
-			'Successful, letting you in ....',
-		)
+		// Alert.alert(
+		// 	'Login Status',
+		// 	'Successful, letting you in ....',
+		// )
+
 
 	}
 	else if (String(action.data.username) !== getJsonUsername || action.data.password == getJsonPassword) {

@@ -40,5 +40,14 @@ const styles = StyleSheet.create({
 		right: -30,
 		top: -15,
 	},
+	ModalStyle: {
+		width: 300,
+		height: 70,
+		alignItems: 'center',
+		alignSelf: 'center',
+		justifyContent: 'center',
+		borderRadius: 20,
+		backgroundColor: '#ffffff',
+	},
 });
 export default styles

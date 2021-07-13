@@ -2,6 +2,7 @@ import React from 'react';
 import {View, Text, StyleSheet, TextInput, Button, TouchableOpacity} from 'react-native';
 //import LoginScreen from '../Login/Login.js'
 import {useDispatch, useSelector} from 'react-redux';
+import {Logout} from '../../Redux/Action/action.js';
 import styles from './styleMainScreen.js';
 
 function MainScreen({navigation, route}) {
@@ -12,6 +13,7 @@ function MainScreen({navigation, route}) {
 			<View>
 				<TouchableOpacity
 					onPress={() => {
+						dispatch(Logout())
 						navigation.navigate('Login');
 					}}
 					style={styles.ButtonLogout}>
