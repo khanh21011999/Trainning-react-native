@@ -16,16 +16,9 @@ export const LoginSuccess = (data) => {
 	};
 };
 
-export const LoginFailed = (data) => {
-	return {
-		type: actionList.LOGIN_FAIL,
-		data,
-	};
-};
 
-export const Logout = (data) => {
+export const Logout = () => {
 	return {
 		type: actionList.LOG_OUT,
-		data
 	};
 };

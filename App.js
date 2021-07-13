@@ -5,11 +5,16 @@ import {createStackNavigator} from '@react-navigation/stack';
 import MainScreen from './src/Screen/MainScreen/MainScreen.js';
 import 'react-native-gesture-handler';
 import {NavigationContainer} from '@react-navigation/native';
+const navigationRef = React.createRef();
+
+export function navigate(name) {
+  navigationRef.current && navigationRef.current.navigate(name);
+}
 
 const Stack = createStackNavigator();
 function NavigationRoute() {
 	return (
-		<NavigationContainer>
+		<NavigationContainer ref={navigationRef}>
 			<Stack.Navigator>
 				<Stack.Screen
 					options={{
