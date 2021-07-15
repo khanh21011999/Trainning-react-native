@@ -1,7 +1,10 @@
-import {takeLatest } from 'redux-saga/effects';
-import {GET_USER_INFO} from '../Action/ActionList.js';
-import {loginSaga} from './handler/SagaLogin.js'
+import {all} from 'redux-saga/effects';
+import {handleSagaLogin} from './handler/SagaLogin.js'
+import {handleSagaLogout} from './handler/sagaLogout.js';
 export function* watchSaga() {
-	yield takeLatest(GET_USER_INFO,loginSaga);
+	yield all([
+		handleSagaLogin(),
+		handleSagaLogout()
+	])
 }
 

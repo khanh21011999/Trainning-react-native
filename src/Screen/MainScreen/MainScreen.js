@@ -1,21 +1,19 @@
 import React from 'react';
-import {View, Text, StyleSheet, TextInput, Button, TouchableOpacity} from 'react-native';
-//import LoginScreen from '../Login/Login.js'
-import {useDispatch, useSelector} from 'react-redux';
-import {Logout} from '../../Redux/Action/action.js';
+import {View, Text,TouchableOpacity} from 'react-native';
+import {useDispatch} from 'react-redux';
 import styles from './styleMainScreen.js';
 
-function MainScreen({navigation, route}) {
+function mainScreen() {
 	const dispatch = useDispatch();
+	function removeUser() {
+		dispatch({type: 'LOG_OUT_FUNC'})
+	}
 	return (
 		<View style={styles.ViewStyle}>
 			<Text style={styles.TextForm}>Welcome to System</Text>
 			<View>
 				<TouchableOpacity
-					onPress={() => {
-						dispatch(Logout())
-						navigation.navigate('Login');
-					}}
+					onPress={removeUser()}
 					style={styles.ButtonLogout}>
 					<Text>Log out</Text>
 				</TouchableOpacity>
@@ -24,4 +22,4 @@ function MainScreen({navigation, route}) {
 	);
 }
 
-export default MainScreen;
+export default mainScreen;

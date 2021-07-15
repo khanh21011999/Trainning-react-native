@@ -1,35 +1,39 @@
 import 'react-native-gesture-handler';
 import React from 'react';
-import LoginScreen from './src/Screen/Login/Login.js';
+import loginScreen from './src/Screen/Login/Login.js';
 import {createStackNavigator} from '@react-navigation/stack';
-import MainScreen from './src/Screen/MainScreen/MainScreen.js';
+import mainScreen from './src/Screen/MainScreen/MainScreen.js';
 import 'react-native-gesture-handler';
 import {NavigationContainer} from '@react-navigation/native';
+import {useSelector} from 'react-redux';
+import authReducer from './src/Redux/Reducer/AuthReducer';
 const navigationRef = React.createRef();
 
-export function navigate(name) {
-  navigationRef.current && navigationRef.current.navigate(name);
-}
 
 const Stack = createStackNavigator();
 function NavigationRoute() {
+	const signInStatus = useSelector((state) => {
+		return (state.authReducer.isAuth)
+	})
 	return (
-		<NavigationContainer ref={navigationRef}>
+		<NavigationContainer>
+
 			<Stack.Navigator>
-				<Stack.Screen
-					options={{
-            headerShown: false,
-					}}
-					name="Login"
-					component={LoginScreen}
-				/>
-				<Stack.Screen
-					options={{
-						headerShown: false,
-					}}
-					name="Home"
-					component={MainScreen}
-				/>
+				{!signInStatus ? (
+					<Stack.Screen
+						options={{
+							headerShown: false,
+						}}
+						name="Login"
+						component={loginScreen}
+					/>) :
+					(<Stack.Screen
+						options={{
+							headerShown: false,
+						}}
+						name="Home"
+						component={mainScreen}
+					/>)}
 			</Stack.Navigator>
 		</NavigationContainer>
 	);

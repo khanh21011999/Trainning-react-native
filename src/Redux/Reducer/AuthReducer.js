@@ -1,18 +1,23 @@
 import * as actionList from '../Action/ActionList.js';
 const initStateAuth = {
 	isAuth: false,
-	ModalShow:false,
 }
-const AuthReducer = (state = initStateAuth, action) => {
+const authReducer = (state = initStateAuth, action) => {
 	switch (action.type) {
 		case actionList.LOGIN_SUCCESS:
 			{
 				return {
 					isAuth: true,
-					ModalShow:true
 				};
 			}
+		case actionList.RESTORE_TOKEN:
+			{
+				return {
+					isAuth: true
+				}
+			}
 		case actionList.LOG_OUT:
+			console.log("user removed")
 			{
 				return initStateAuth
 			}
@@ -20,4 +25,4 @@ const AuthReducer = (state = initStateAuth, action) => {
 			return state;
 	}
 }
-export default AuthReducer
+export default authReducer
