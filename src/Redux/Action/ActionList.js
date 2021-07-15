@@ -3,3 +3,4 @@ export const LOG_OUT = 'LOG_OUT'
 export const GET_USER_INFO = 'GET_USER_INFO';
 export const LOGIN_ERROR = 'LOGIN_ERROR';
 export const LOG_OUT_FUNC = 'LOG_OUT_FUNC'
+export const SHOW_INDICATOR='SHOW_INDICATOR'

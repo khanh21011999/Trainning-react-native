@@ -4,7 +4,7 @@ import {requestGetUser} from '../../../Services/user.js'
 import {CommonActions} from '@react-navigation/native';
 import {navigate} from '../../../../App.js';
 import Toast from 'react-native-toast-message';
-import {GET_USER_INFO, LOGIN_ERROR, LOGIN_SUCCESS} from './../../Action/ActionList';
+import {GET_USER_INFO, LOGIN_ERROR, LOGIN_SUCCESS, SHOW_INDICATOR} from './../../Action/ActionList';
 import AsyncStorage from '@react-native-community/async-storage';
 
 function* handleSagaLogin() {
@@ -26,7 +26,8 @@ function saveToAsyncStorage(data) {
 	}
 }
 function* loginSaga(action) {
-
+  console.log('saga is working')
+	yield put({type:SHOW_INDICATOR})
 	const getJson = yield call(requestGetUser)
 	const getJsonUsername = getJson.username
 	const getJsonPassword = getJson.password

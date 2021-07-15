@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import * as Yup from 'yup';
-import {View, Text, Alert, Modal, TextInput, TouchableOpacity, ActivityIndicator} from 'react-native';
+import {View, Text, Alert, TextInput, TouchableOpacity, ActivityIndicator} from 'react-native';
 import {Formik} from 'formik';
 import styles from './styleLogin.js'
 import {useDispatch, useSelector} from 'react-redux';
@@ -22,6 +22,7 @@ const loginValidationSchema = Yup.object().shape({
 function loginScreen() {
 	const dispatch = useDispatch();
 	//save Async if token is valid
+
 	function showAlert() {
 		return (Alert.alert(
 			'Login Status',
@@ -35,20 +36,36 @@ function loginScreen() {
 			]
 		))
 	}
+	function showIndicator(){
+		return(
+			<ActivityIndicator
+			size='large'
+			color='#69706b'
+			/>
+		)
+	}
+	function showLoginText(isValid){
+		return(
+			<Text style={getTextStyle(isValid)}>Login</Text>
+		)
+	}
+	function getIndicator(isValid) {
+		return (getIndicatorStatus ? showIndicator() : showLoginText(isValid))
+	}
 	function getShowAlert() {
 		return (getErrorStatus ? showAlert() : null)
 	}
-
-
 	//getUserfromFormik , Formik using {} format for named field
 	const getUser = ({email, password}) => {
 		dispatch(getUserInfo(email, password));
 
 	};
+	const getIndicatorStatus = useSelector((state) => {
+		return (state.authReducer.isShowIndicator)
+	})
 	const getErrorStatus = useSelector((state) => {
 		return (state.authReducer.isError)
 	})
-
 
 	//make Login text visible when inputs are correct
 	function getTextStyle(isValid) {
@@ -61,10 +78,8 @@ function loginScreen() {
 			color: 'grey',
 		};
 	}
-
 	return (
 		<View style={styles.ViewStyle}>
-
 			<Text style={{fontSize: 40}}>Login To System</Text>
 			{getShowAlert()}
 
@@ -105,7 +120,7 @@ function loginScreen() {
 							onPress={handleSubmit}
 							style={styles.ButtonLogin}
 							disabled={!isValid || values.email === ''}>
-							<Text style={getTextStyle(isValid)}>Login</Text>
+							{getIndicator(isValid)}
 						</TouchableOpacity>
 					</View>
 				)}
