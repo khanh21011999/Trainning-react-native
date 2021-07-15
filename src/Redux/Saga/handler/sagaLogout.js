@@ -5,7 +5,7 @@ function* handleSagaLogout() {
 	yield takeLatest(LOG_OUT_FUNC, logOutSaga);
 }
 function* logOutSaga() {
-
+	console.log('removed')
 	AsyncStorage.removeItem('data')
 	yield put({type:LOG_OUT})
 

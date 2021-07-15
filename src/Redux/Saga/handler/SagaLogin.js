@@ -4,7 +4,7 @@ import {requestGetUser} from '../../../Services/user.js'
 import {CommonActions} from '@react-navigation/native';
 import {navigate} from '../../../../App.js';
 import Toast from 'react-native-toast-message';
-import {GET_USER_INFO} from './../../Action/ActionList';
+import {GET_USER_INFO, LOGIN_SUCCESS} from './../../Action/ActionList';
 import AsyncStorage from '@react-native-community/async-storage';
 
 function* handleSagaLogin() {
@@ -32,7 +32,7 @@ function* loginSaga(action) {
 	const getJsonPassword = getJson.password
 	if (action.data.username === getJsonUsername && action.data.password == getJsonPassword) {
 		console.log('saga login success')
-		yield put({type: 'LOGIN_SUCCESS'})
+		yield put({type: LOGIN_SUCCESS})
 		saveToAsyncStorage(action.data)
 	}
 	else if (action.data.username !== getJsonUsername || action.data.password != getJsonPassword) {

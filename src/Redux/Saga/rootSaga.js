@@ -4,7 +4,6 @@ import {handleSagaLogout} from './handler/sagaLogout.js';
 export function* watchSaga() {
 	yield all([
 		handleSagaLogin(),
-		handleSagaLogout()
-	])
+		handleSagaLogout()])
 }
 

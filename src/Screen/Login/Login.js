@@ -19,21 +19,8 @@ const loginValidationSchema = Yup.object().shape({
 
 function loginScreen() {
 	const dispatch = useDispatch();
-
-
 	//save Async if token is valid
-	useEffect(async () => {
-		try {
-			const value = await AsyncStorage.getItem('data')
-			if (value !== null) {
-				console.log(value)
-				dispatch({type: 'RESTORE_TOKEN'})
-			}
-			else (console.log('NULL VALUE'))
-		} catch (error) {
-		}
-
-	})
+	
 
 	//getUserfromFormik , Formik using {} format for named field
 	const getUser = ({email, password}) => {
