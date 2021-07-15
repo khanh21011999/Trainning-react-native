@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import * as Yup from 'yup';
-import {View, Text, Modal, TextInput, TouchableOpacity, ActivityIndicator} from 'react-native';
+import {View, Text, Alert, Modal, TextInput, TouchableOpacity, ActivityIndicator} from 'react-native';
 import {Formik} from 'formik';
 import styles from './styleLogin.js'
 import {useDispatch, useSelector} from 'react-redux';
@@ -8,6 +8,8 @@ import {getUserInfo} from '../../Redux/Action/action.js';
 import Toast from 'react-native-toast-message';
 import Loader from 'react-loader-spinner';
 import AsyncStorage from '@react-native-community/async-storage';
+import authReducer from './../../Redux/Reducer/AuthReducer';
+import {LOG_OUT} from '../../Redux/Action/ActionList.js';
 
 
 const loginValidationSchema = Yup.object().shape({
@@ -20,12 +22,32 @@ const loginValidationSchema = Yup.object().shape({
 function loginScreen() {
 	const dispatch = useDispatch();
 	//save Async if token is valid
-	
+	function showAlert() {
+		return (Alert.alert(
+			'Login Status',
+			'Wrong username or password',
+			[
+				{
+					text: 'OKey',
+					onPress: () => {dispatch({type: LOG_OUT})},
+					style: 'cancel'
+				}
+			]
+		))
+	}
+	function getShowAlert() {
+		return (getErrorStatus ? showAlert() : null)
+	}
+
 
 	//getUserfromFormik , Formik using {} format for named field
 	const getUser = ({email, password}) => {
 		dispatch(getUserInfo(email, password));
+
 	};
+	const getErrorStatus = useSelector((state) => {
+		return (state.authReducer.isError)
+	})
 
 
 	//make Login text visible when inputs are correct
@@ -44,7 +66,7 @@ function loginScreen() {
 		<View style={styles.ViewStyle}>
 
 			<Text style={{fontSize: 40}}>Login To System</Text>
-			<Toast ref={(ref) => Toast.setRef(ref)} />
+			{getShowAlert()}
 
 			<Formik
 				validateOnMount
@@ -54,6 +76,7 @@ function loginScreen() {
 			>
 				{({handleChange, handleBlur, handleSubmit, values, errors, touched, isValid}) => (
 					<View>
+
 
 						<TextInput
 							name="email"

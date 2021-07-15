@@ -8,6 +8,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {useSelector} from 'react-redux';
 import authReducer from './src/Redux/Reducer/AuthReducer';
 import {useEffect } from 'react';
+import {LOGIN_SUCCESS} from './src/Redux/Action/ActionList.js';
 const navigationRef = React.createRef();
 
 
@@ -18,7 +19,7 @@ function NavigationRoute() {
 			const value = await AsyncStorage.getItem('data')
 			if (value !== null) {
 				console.log(value)
-				dispatch({type: 'RESTORE_TOKEN'})
+				dispatch({type:LOGIN_SUCCESS})
 			}
 			else (console.log('NULL VALUE'))
 		} catch (error) {

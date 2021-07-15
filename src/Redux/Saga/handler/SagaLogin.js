@@ -4,7 +4,7 @@ import {requestGetUser} from '../../../Services/user.js'
 import {CommonActions} from '@react-navigation/native';
 import {navigate} from '../../../../App.js';
 import Toast from 'react-native-toast-message';
-import {GET_USER_INFO, LOGIN_SUCCESS} from './../../Action/ActionList';
+import {GET_USER_INFO, LOGIN_ERROR, LOGIN_SUCCESS} from './../../Action/ActionList';
 import AsyncStorage from '@react-native-community/async-storage';
 
 function* handleSagaLogin() {
@@ -37,13 +37,7 @@ function* loginSaga(action) {
 	}
 	else if (action.data.username !== getJsonUsername || action.data.password != getJsonPassword) {
 		console.log('wrong username or password')
-		Alert.alert(
-			'Login Status',
-			'Wrong username or password',
-			[
-				{text: 'OKey', style: 'cancel'}
-			]
-		)
+		yield put({type: LOGIN_ERROR})
 	}
 
 }

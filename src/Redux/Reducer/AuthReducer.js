@@ -1,6 +1,7 @@
 import * as actionList from '../Action/ActionList.js';
 const initStateAuth = {
 	isAuth: false,
+	isError:false
 }
 const authReducer = (state = initStateAuth, action) => {
 	switch (action.type) {
@@ -9,12 +10,15 @@ const authReducer = (state = initStateAuth, action) => {
 				console.log('Login success')
 				return {
 					isAuth: true,
+					isError: false
 				};
 			}
-		case actionList.RESTORE_TOKEN:
+		case actionList.LOGIN_ERROR:
 			{
 				return {
-					isAuth: true
+					isAuth: false,
+					isError: true
+
 				}
 			}
 		case actionList.LOG_OUT:
