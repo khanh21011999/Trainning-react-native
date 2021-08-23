@@ -5,11 +5,12 @@ import React from 'react';
 import { name as appName } from './app.json';
 import { Provider } from 'react-redux'
 // import Counter from './src/Redux/counter.js';
+import Abc from './src/Screen/test.js';
 import store from './src/Redux/Store/store.js'
 function Display() {
     return (
         <Provider store={store}>
-            <App/>
+          <Abc/>
         </Provider>
     )
 }
